@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verification Information</title>
+
+    <style>
+        p {
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        b {
+            font-weight: 800;
+        }
+
+        h2 {
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="file" id="photoInput" accept="image/*">
+
+    <h2>Verification Information</h2>
+
+    <img id="profilePhoto" width="150" alt="Photo">
+
+    <p><b>CIVIL NUMBER:</b> <span id="civilNumber"></span></p>
+    <p><b>NAME:</b> <span id="name"></span></p>
+    <p><b>NATIONALITY:</b> <span id="nationality"></span></p>
+    <p><b>VERIFICATION NO:</b> <span id="verificationNo"></span></p>
+    <p><b>ISSUE DATE:</b> <span id="issue"></span></p>
+
+    <script>
+        let params = new URLSearchParams(window.location.search);
+
+        document.getElementById("civilNumber").textContent =
+            params.get("civilNumber") || "";
+
+        document.getElementById("name").textContent =
+            params.get("name") || "";
+
+        document.getElementById("nationality").textContent =
+            params.get("nationality") || "";
+
+        document.getElementById("verificationNo").textContent =
+            params.get("verificationNo") || "";
+
+        document.getElementById("issue").textContent =
+            params.get("issue") || "";
+
+        let photo = params.get("photo");
+
+        if (photo) {
+            document.getElementById("profilePhoto").src = photo;
+        }
+
+        document.getElementById("photoInput").addEventListener("change", function () {
+            const file = this.files[0];
+
+            if (file) {
+                document.getElementById("profilePhoto").src =
+                    URL.createObjectURL(file);
+            }
+        });
+    </script>
+
+</body>
+</html>
