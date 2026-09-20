@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student QR Generator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            font-weight: 800;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 12px 20px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        #qrcode {
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>issue-ola.com</h1>
+
+    <label>CIVIL NUMBER</label>
+    <input type="text" id="civilNumber" placeholder="Enter Civil Number">
+
+    <label>NAME</label>
+    <input type="text" id="name" placeholder="Enter Name">
+
+    <label>NATIONALITY</label>
+    <input type="text" id="nationality" placeholder="Enter Nationality">
+
+    <label>VERIFICATION NO</label>
+    <input type="text" id="verificationNo" placeholder="Enter Verification No">
+
+    <label>ISSUE DATE</label>
+    <input type="text" id="issue" placeholder="Enter Issue Date">
+
+    <label>PHOTO URL</label>
+    <input type="text" id="photo" placeholder="Enter Photo URL">
+
+    <button onclick="generateQR()">Generate QR Code</button>
+
+    <div id="qrcode"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        function generateQR() {
+
+            const civilNumber =
+                document.getElementById("civilNumber").value;
+
+            const name =
+                document.getElementById("name").value;
+
+            const nationality =
+                document.getElementById("nationality").value;
+
+            const verificationNo =
+                document.getElementById("verificationNo").value;
+
+            const issue =
+                document.getElementById("issue").value;
+
+            const photo =
+                document.getElementById("photo").value;
+
+            const profileURL =
+    "https://sgahqyagcwja-lab.github.io/student-qr/profile.html" +
+                "?civilNumber=" + encodeURIComponent(civilNumber) +
+                "&name=" + encodeURIComponent(name) +
+                "&nationality=" + encodeURIComponent(nationality) +
+                "&verificationNo=" + encodeURIComponent(verificationNo) +
+                "&issue=" + encodeURIComponent(issue) +
+                "&photo=" + encodeURIComponent(photo);
+
+            document.getElementById("qrcode").innerHTML = "";
+
+            new QRCode(document.getElementById("qrcode"), {
+                text: profileURL,
+                width: 200,
+                height: 200
+            });
+        }
+    </script>
+
+</body>
+</html>
